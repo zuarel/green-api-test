@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin-inline-start: auto;
+}
+
+.container .button {
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid #cbd5cf;
+  border-radius: 8px;
+  background: transparent;
+  color: #52665b;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.container .button:hover {
+  background: #eef3f1;
+}
+
+.container .button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.button:focus-visible {
+  outline: 3px solid #81c99c;
+  outline-offset: 3px;
+}
+
+.container .link {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: #218649;
+}
+
+.container .link:hover {
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.error {
+  max-width: 220px;
+  margin: 0;
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}

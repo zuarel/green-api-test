@@ -1,0 +1,104 @@
+.page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 32px;
+  border: 1px solid #e2e8e5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgb(24 54 40 / 7%);
+}
+
+.card h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.description {
+  margin: 0 0 28px;
+  color: #64716a;
+  line-height: 1.5;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card label {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card input {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 20px;
+  padding: 12px 14px;
+  border: 1px solid #cbd5cf;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.card button {
+  margin-top: 4px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  background: #218649;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: #196c3a;
+}
+
+.card button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.card input:focus-visible,
+.card button:focus-visible {
+  outline: 3px solid #81c99c;
+  outline-offset: 3px;
+}
+
+.message {
+  overflow-wrap: anywhere;
+  margin: 16px 0 0;
+  color: #64716a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dialog {
+  max-width: min(400px, calc(100vw - 48px));
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  color: inherit;
+}
+
+.dialog::backdrop {
+  background: rgb(15 23 42 / 45%);
+}
+
+.dialog h2 {
+  margin: 0 0 16px;
+  font-size: 24px;
+}
+
+.sessionActions {
+  margin-top: 20px;
+}
