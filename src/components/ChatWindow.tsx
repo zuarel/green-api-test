@@ -15,6 +15,7 @@ export default function ChatWindow({ credentials, chat, onBack }: ChatWindowProp
   const { phone, chatId } = chat;
   const [draft, setDraft] = useState('');
   const historyRef = useRef<HTMLDivElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
   const {
     messages, isHistoryLoading, historyError, isSending, sendError, notificationError,
     sendMessage, reloadHistory, clearSendError,
@@ -24,6 +25,13 @@ export default function ChatWindow({ credentials, chat, onBack }: ChatWindowProp
     const history = historyRef.current;
     if (history) history.scrollTop = history.scrollHeight;
   }, [messages]);
+
+  useEffect(() => {
+    const input = messageInputRef.current;
+    if (!input) return;
+    input.style.height = 'auto';
+    input.style.height = `${input.scrollHeight + input.offsetHeight - input.clientHeight}px`;
+  }, [draft]);
 
   async function handleSend(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,13 +77,23 @@ export default function ChatWindow({ credentials, chat, onBack }: ChatWindowProp
 
         <footer className={styles.footer}>
           <form className={styles.composer} onSubmit={handleSend} aria-busy={isSending}>
-            <input
+            <textarea
+              ref={messageInputRef}
               aria-label="Сообщение"
+              aria-describedby="message-input-hint"
               name="message"
+              rows={1}
               placeholder="Написать сообщение…"
               autoComplete="off"
               value={draft}
               readOnly={isSending}
+              onKeyDown={(event) => {
+                if (event.key !== 'Enter' || event.shiftKey || event.nativeEvent.isComposing) return;
+                event.preventDefault();
+                if (!event.repeat && !isSending && !isHistoryLoading && draft.trim()) {
+                  event.currentTarget.form?.requestSubmit();
+                }
+              }}
               onChange={(event) => {
                 setDraft(event.target.value);
                 clearSendError();
@@ -87,6 +105,7 @@ export default function ChatWindow({ credentials, chat, onBack }: ChatWindowProp
               </svg>
             </button>
           </form>
+          <p id="message-input-hint" className={styles.notice}>Enter — отправить · Shift+Enter — новая строка</p>
           {isSending && <p className={styles.notice} role="status">Отправка…</p>}
           {sendError && <p className={styles.notice} role="status">{sendError}</p>}
           {notificationError && <p className={styles.notice} role="status">{notificationError}</p>}
